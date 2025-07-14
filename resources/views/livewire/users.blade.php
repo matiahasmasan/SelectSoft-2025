@@ -74,40 +74,25 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="hover">
-                    <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">1</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">john.doe@email.com</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">SRL</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">Administrator</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">-</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-3">
-                        <div class="flex gap-2">
-                            <button class="btn btn-xs lg:btn-sm btn-primary">
-                                <span class="icon-[tabler--edit] size-4 lg:size-5"></span>
-                            </button>
-                            <button class="btn btn-xs lg:btn-sm btn-error">
-                                <span class="icon-[tabler--eraser] size-4 lg:size-5"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="hover">
-                    <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">2</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">jane.smith@email.com</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">SRL</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">Utilizator</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">john.doe@email.com</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-3">
-                        <div class="flex gap-2">
-                            <button class="btn btn-xs lg:btn-sm btn-primary">
-                                <span class="icon-[tabler--edit] size-4 lg:size-5"></span>
-                            </button>
-                            <button class="btn btn-xs lg:btn-sm btn-error">
-                                <span class="icon-[tabler--eraser] size-4 lg:size-5"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                @foreach($users as $user)
+                    <tr class="hover">
+                        <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">{{ $user['id'] }}</td>
+                        <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">{{ $user['email'] }}</td>
+                        <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">{{ $user['companie'] }}</td>
+                        <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">{{ $user['rol'] }}</td>
+                        <td class="py-3 lg:py-4 px-2 lg:px-3 text-xs lg:text-sm">{{ $user['subordonat'] }}</td>
+                        <td class="py-3 lg:py-4 px-2 lg:px-3">
+                            <div class="flex gap-2">
+                                <button class="btn btn-xs lg:btn-sm btn-primary">
+                                    <span class="icon-[tabler--edit] size-4 lg:size-5"></span>
+                                </button>
+                                <button class="btn btn-xs lg:btn-sm btn-error">
+                                    <span class="icon-[tabler--eraser] size-4 lg:size-5"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
         <!-- Pagination/Load More -->

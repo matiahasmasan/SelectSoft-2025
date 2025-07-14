@@ -59,34 +59,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="hover">
-                    <td class="py-3 lg:py-4 px-2 lg:px-4 text-center text-sm lg:text-base">1</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-4 text-center text-sm lg:text-base">Administrator</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-4 text-center">
-                        <div class="flex justify-center gap-2">
-                            <button class="btn btn-xs lg:btn-sm btn-primary">
-                                <span class="icon-[tabler--eye] size-4 lg:size-5"></span>
-                            </button>
-                            <button class="btn btn-xs lg:btn-sm btn-error">
-                                <span class="icon-[tabler--eraser] size-4 lg:size-5"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="hover">
-                    <td class="py-3 lg:py-4 px-2 lg:px-4 text-center text-sm lg:text-base">2</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-4 text-center text-sm lg:text-base">Utilizator</td>
-                    <td class="py-3 lg:py-4 px-2 lg:px-4 text-center">
-                        <div class="flex justify-center gap-2">
-                            <button class="btn btn-xs lg:btn-sm btn-primary">
-                                <span class="icon-[tabler--eye] size-4 lg:size-5"></span>
-                            </button>
-                            <button class="btn btn-xs lg:btn-sm btn-error">
-                                <span class="icon-[tabler--eraser] size-4 lg:size-5"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                @foreach($roles as $role)
+                    <tr class="hover">
+                        <td class="py-3 lg:py-4 px-2 lg:px-4 text-center text-sm lg:text-base">{{ $role['id'] }}</td>
+                        <td class="py-3 lg:py-4 px-2 lg:px-4 text-center text-sm lg:text-base">{{ $role['rol'] }}</td>
+                        <td class="py-3 lg:py-4 px-2 lg:px-4 text-center">
+                            <div class="flex justify-center gap-2">
+                                <button class="btn btn-xs lg:btn-sm btn-primary">
+                                    <span class="icon-[tabler--eye] size-4 lg:size-5"></span>
+                                </button>
+                                <button class="btn btn-xs lg:btn-sm btn-error">
+                                    <span class="icon-[tabler--eraser] size-4 lg:size-5"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
         <!-- Pagination/Load More -->

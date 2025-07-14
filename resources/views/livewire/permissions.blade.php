@@ -1,5 +1,4 @@
 <div class="card shadow-lg container mx-auto px-2 sm:px-4 lg:px-6 py-6 w-full max-w-7xl">
-    <!-- Title Row -->
     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
         <span class="card-title">{{ __('Permisiuni') }}</span>
         <button class="btn btn-primary btn-sm lg:btn-md flex items-center gap-2 px-4 py-2 text-sm lg:text-base font-semibold rounded-lg shadow hover:bg-primary-focus transition w-full sm:w-auto" @click="addRoleModalOpen = true">
@@ -48,156 +47,34 @@
         </div>
     </div>
 
-    <!-- Permissions Accordions -->
+    <!-- Permissions  -->
     <div class="w-full space-y-3 lg:space-y-4">
-        <!-- Accordion 1 -->
-        <div x-data="{ open: false }" class="border rounded-lg bg-base-100 shadow transition-all duration-500">
-            <button @click="open = !open" class="w-full flex justify-between items-center px-4 lg:px-6 py-3 lg:py-4 text-base lg:text-lg font-semibold focus:outline-none">
-                <span>{{ __('Gestionare utilizatori') }}</span>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform icon-[tabler--chevron-down] size-5 lg:size-6"></span>
-            </button>
-            <div x-show="open" x-transition:enter="transition-all ease-in-out duration-500" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-96" x-transition:leave="transition-all ease-in-out duration-400" x-transition:leave-start="opacity-100 max-h-96" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden px-4 lg:px-6 pb-4 lg:pb-6">
-                <div class="flex flex-col gap-3 lg:gap-4">
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                        <span class="text-sm lg:text-base">{{ __('Vizualizare utilizatori') }}</span>
-                        <div class="flex gap-2 lg:gap-3">
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">R</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">W</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">U</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">D</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                        <span class="text-sm lg:text-base">{{ __('Adaugă utilizator') }}</span>
-                        <div class="flex gap-2 lg:gap-3">
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">R</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">W</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">U</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">D</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                        <span class="text-sm lg:text-base">{{ __('Șterge utilizator') }}</span>
-                        <div class="flex gap-2 lg:gap-3">
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">R</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">W</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">U</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">D</span>
-                            </label>
-                        </div>
+        <!-- CATEGORIES -->
+        @foreach($permissions as $category)
+            <div x-data="{ open: false }" class="border rounded-lg bg-base-100 shadow transition-all duration-500">
+                <button @click="open = !open" class="w-full flex justify-between items-center px-4 lg:px-6 py-3 lg:py-4 text-base lg:text-lg font-semibold focus:outline-none">
+                    <span>{{ __($category['category']) }}</span>
+                    <span :class="open ? 'rotate-180' : ''" class="transition-transform icon-[tabler--chevron-down] size-5 lg:size-6"></span>
+                </button>
+                <div x-show="open" x-transition:enter="transition-all ease-in-out duration-500" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-96" x-transition:leave="transition-all ease-in-out duration-400" x-transition:leave-start="opacity-100 max-h-96" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden px-4 lg:px-6 pb-4 lg:pb-6">
+                    <div class="flex flex-col gap-3 lg:gap-4">
+                        <!-- PERMISSIONS -->
+                        @foreach($category['items'] as $item)
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+                                <span class="text-sm lg:text-base">{{ __($item['name']) }}</span>
+                                <div class="flex gap-2 lg:gap-3">
+                                    @foreach($item['rights'] as $right)
+                                        <label class="cursor-pointer flex items-center gap-1">
+                                            <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
+                                            <span class="label-text text-xs lg:text-sm">{{ $right }}</span>
+                                        </label>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Accordion 2 -->
-        <div x-data="{ open: false }" class="border rounded-lg bg-base-100 shadow transition-all duration-500">
-            <button @click="open = !open" class="w-full flex justify-between items-center px-4 lg:px-6 py-3 lg:py-4 text-base lg:text-lg font-semibold focus:outline-none">
-                <span>{{ __('Gestionare rapoarte') }}</span>
-                <span :class="open ? 'rotate-180' : ''" class="transition-transform icon-[tabler--chevron-down] size-5 lg:size-6"></span>
-            </button>
-            <div x-show="open" x-transition:enter="transition-all ease-in-out duration-500" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-96" x-transition:leave="transition-all ease-in-out duration-400" x-transition:leave-start="opacity-100 max-h-96" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden px-4 lg:px-6 pb-4 lg:pb-6">
-                <div class="flex flex-col gap-3 lg:gap-4">
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                        <span class="text-sm lg:text-base">{{ __('Vizualizare rapoarte') }}</span>
-                        <div class="flex gap-2 lg:gap-3">
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">R</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">W</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">U</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">D</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                        <span class="text-sm lg:text-base">{{ __('Generează raport') }}</span>
-                        <div class="flex gap-2 lg:gap-3">
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">R</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">W</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">U</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">D</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-                        <span class="text-sm lg:text-base">{{ __('Șterge raport') }}</span>
-                        <div class="flex gap-2 lg:gap-3">
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">R</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">W</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">U</span>
-                            </label>
-                            <label class="cursor-pointer flex items-center gap-1">
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm lg:checkbox-md transition-all duration-200" />
-                                <span class="label-text text-xs lg:text-sm">D</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
