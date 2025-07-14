@@ -1,45 +1,39 @@
 <div class="card shadow-lg container mx-auto px-2 sm:px-4 lg:px-6 py-6 w-full max-w-7xl">
     <!-- Title Row -->
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
         <span class="card-title">{{ __('Permisiuni') }}</span>
-        
+        <button class="btn btn-primary btn-sm lg:btn-md flex items-center gap-2 px-4 py-2 text-sm lg:text-base font-semibold rounded-lg shadow hover:bg-primary-focus transition w-full sm:w-auto" @click="addRoleModalOpen = true">
+            <span class="icon-[tabler--edit] text-base lg:text-lg"></span>
+            <span>{{ __('Editează') }}</span>
+        </button>
     </div>
     
-    <!-- Search, Sort, and Role Bar (Responsive Layout) -->
-    <div class="space-y-3 xl:space-y-0 mb-4">
-        <!-- Mobile/Tablet: Stacked Layout -->
+    <!-- FILTERS -->
+    <div class="space-y-3 xl:space-y-0 mb-2 xl:mb-6">
+        <!-- Mobile Tablet-->
         <div class="block xl:hidden space-y-3">
-            <!-- Search Row -->
             <div class="flex gap-2">
                 <input type="text" class="input input-bordered input-sm md:input-md flex-1" placeholder="{{ __('Caută...') }}" />
-                <button class="btn btn-primary btn-sm md:btn-md px-3">
-                    <span class="icon-[tabler--search] size-4 md:size-5"></span>
-                </button>
             </div>
-            
-            <!-- Filters Row -->
-            <div class="flex flex-col sm:flex-row gap-2">
-                <select class="select select-bordered select-sm md:select-md flex-1 sm:max-w-xs">
+            <!-- Row -->
+            <div class="flex gap-2">
+                <select class="select select-bordered select-sm md:select-md flex-1">
                     <option>{{ __('Sortează după') }}</option>
                     <option>{{ __('Rol') }}</option>
                     <option>{{ __('ID') }}</option>
                 </select>
-                <select class="select select-bordered select-sm md:select-md flex-1 sm:max-w-xs">
+                <select class="select select-bordered select-sm md:select-md flex-1">
                     <option>{{ __('Selectează rolul') }}</option>
                     <option>Administrator</option>
                     <option>Utilizator</option>
                 </select>
-                <button class="btn btn-primary btn-sm md:btn-md px-6">{{ __('Editează') }}</button>
             </div>
         </div>
 
-        <!-- Desktop: Horizontal Layout -->
+        <!-- Desktop -->
         <div class="hidden xl:flex items-center gap-3">
             <div class="flex flex-1 gap-2 min-w-0">
                 <input type="text" class="input input-bordered input-md w-full min-w-0" placeholder="{{ __('Caută...') }}" />
-                <button class="btn btn-primary btn-md px-3 flex-shrink-0">
-                    <span class="icon-[tabler--search] size-5"></span>
-                </button>
             </div>
             <select class="select select-bordered select-md w-44 flex-shrink-0">
                 <option>{{ __('Sortează după') }}</option>
@@ -51,7 +45,6 @@
                 <option>Administrator</option>
                 <option>Utilizator</option>
             </select>
-            <button class="btn btn-primary btn-md px-6 flex-shrink-0">{{ __('Editează') }}</button>
         </div>
     </div>
 

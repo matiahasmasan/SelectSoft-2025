@@ -1,14 +1,14 @@
 <div x-data="{ addRoleModalOpen: false, roleName: '' }" class="card shadow-lg container mx-auto px-2 sm:px-4 lg:px-6 py-6 w-full max-w-7xl">
-    <!-- Title and Add Role Button -->
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
         <span class="card-title">{{ __('Roluri') }}</span>
         <button class="btn btn-primary btn-sm lg:btn-md flex items-center gap-2 px-4 py-2 text-sm lg:text-base font-semibold rounded-lg shadow hover:bg-primary-focus transition w-full sm:w-auto" @click="addRoleModalOpen = true">
             <span class="icon-[tabler--plus] text-base lg:text-lg"></span>
             <span>{{ __('Adaugă rol') }}</span>
-        </button>
+        </button>   
     </div>
 
-    <!-- Add Role Modal -->
+    <!-- MODAL -->
+    <!-- 
     <div x-show="addRoleModalOpen" style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
         <div class="bg-base-100 rounded-lg shadow-lg w-full max-w-md p-6 relative">
             <h2 class="text-lg font-semibold mb-4">{{ __('Adaugă rol nou') }}</h2>
@@ -22,21 +22,13 @@
             </button>
         </div>
     </div>
-
-    <!-- Search and Sort Bar (Responsive Layout) -->
-    <div class="space-y-3 xl:space-y-0 mb-4">
-        <!-- Mobile/Tablet: Stacked Layout -->
+    -->
+    <!-- FILTERS -->
+    <div class="space-y-3 xl:space-y-0 mb-2 xl:mb-6">
+        <!-- Mobile Tablet -->
         <div class="block xl:hidden space-y-3">
-            <!-- Search Row -->
             <div class="flex gap-2">
-                <input type="text" class="input input-bordered input-sm md:input-md flex-1" placeholder="{{ __('Caută...') }}" />
-                <button class="btn btn-primary btn-sm md:btn-md px-3">
-                    <span class="icon-[tabler--search] size-4 md:size-5"></span>
-                </button>
-            </div>
-            
-            <!-- Sort Row -->
-            <div class="flex">
+                <input type="text" class="input input-bordered input-sm md:input-md max-w-xs" placeholder="{{ __('Caută...') }}" />
                 <select class="select select-bordered select-sm md:select-md max-w-xs">
                     <option>{{ __('Sortează după') }}</option>
                     <option>{{ __('Rol') }}</option>
@@ -45,14 +37,9 @@
             </div>
         </div>
 
-        <!-- Desktop: Horizontal Layout -->
+        <!-- Desktop -->
         <div class="hidden xl:flex items-center gap-3">
-            <div class="flex flex-1 gap-2 min-w-0">
-                <input type="text" class="input input-bordered input-md w-full min-w-0" placeholder="{{ __('Caută...') }}" />
-                <button class="btn btn-primary btn-md px-3 flex-shrink-0">
-                    <span class="icon-[tabler--search] size-5"></span>
-                </button>
-            </div>
+            <input type="text" class="input input-bordered input-md w-full min-w-0" placeholder="{{ __('Caută...') }}" />
             <select class="select select-bordered select-md w-44 flex-shrink-0">
                 <option>{{ __('Sortează după') }}</option>
                 <option>{{ __('Rol') }}</option>
@@ -62,7 +49,7 @@
     </div>
 
     <!-- Roles Table -->
-    <div class="overflow-x-auto rounded-lg shadow-xl bg-base-100">
+    <div class="overflow-x-auto rounded-lg shadow-sm bg-base-100">
         <table class="table w-full min-w-[400px] lg:min-w-[600px]">
             <thead>
                 <tr class="bg-base-200 text-base-content/80">
@@ -77,10 +64,10 @@
                     <td class="py-3 lg:py-4 px-2 lg:px-4 text-center text-sm lg:text-base">Administrator</td>
                     <td class="py-3 lg:py-4 px-2 lg:px-4 text-center">
                         <div class="flex justify-center gap-2">
-                            <button class="btn btn-sm lg:btn-md btn-primary">
+                            <button class="btn btn-xs lg:btn-sm btn-primary">
                                 <span class="icon-[tabler--eye] size-4 lg:size-5"></span>
                             </button>
-                            <button class="btn btn-sm lg:btn-md btn-error">
+                            <button class="btn btn-xs lg:btn-sm btn-error">
                                 <span class="icon-[tabler--eraser] size-4 lg:size-5"></span>
                             </button>
                         </div>
@@ -91,10 +78,10 @@
                     <td class="py-3 lg:py-4 px-2 lg:px-4 text-center text-sm lg:text-base">Utilizator</td>
                     <td class="py-3 lg:py-4 px-2 lg:px-4 text-center">
                         <div class="flex justify-center gap-2">
-                            <button class="btn btn-sm lg:btn-md btn-primary">
+                            <button class="btn btn-xs lg:btn-sm btn-primary">
                                 <span class="icon-[tabler--eye] size-4 lg:size-5"></span>
                             </button>
-                            <button class="btn btn-sm lg:btn-md btn-error">
+                            <button class="btn btn-xs lg:btn-sm btn-error">
                                 <span class="icon-[tabler--eraser] size-4 lg:size-5"></span>
                             </button>
                         </div>
