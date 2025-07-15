@@ -158,5 +158,10 @@
     "Adaugă rol nou": "Add new role",
     "Nume rol": "Role name",
     "Adaugă": "Add",
-    "Renunță": "Cancel"
+    "Renunță": "Cancel",
+    "Șterge rol": "Delete role",
+    "Ești sigur că vrei să ștergi acest rol?": "Are you sure you want to delete this role?",
+    "Șterge": "Delete",
+    "Rol:": "Role:",
+    "Ești sigur că vrei să ștergi acest utilizator?": "Are you sure you want to delete this user?"
 }
