@@ -14,7 +14,7 @@ class Roles extends Component
         [
             'id' => 2,
             'rol' => 'Utilizator',
-        ],
+        ],  
     ];
 
     public function render()
