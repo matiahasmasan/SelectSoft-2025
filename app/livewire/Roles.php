@@ -3,24 +3,56 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Roles extends Component
 {
-    public array $roles = [
-        [
-            'id' => 1,
-            'rol' => 'Administrator',
-        ],
-        [
-            'id' => 2,
-            'rol' => 'Utilizator',
-        ],  
+    use WithPagination;
+
+    public int $perPage = 5; // Roles per page
+
+    public array $allRoles = [
+        [ 'id' => 1, 'rol' => 'Administrator' ],
+        [ 'id' => 2, 'rol' => 'Utilizator' ],
+        [ 'id' => 3, 'rol' => 'Manager' ],
+        [ 'id' => 4, 'rol' => 'Operator' ],
+        [ 'id' => 5, 'rol' => 'Vizitator' ],
+        [ 'id' => 6, 'rol' => 'Supervizor' ],
+        [ 'id' => 7, 'rol' => 'Contabil' ],
+        [ 'id' => 8, 'rol' => 'Tehnic' ],
+        [ 'id' => 9, 'rol' => 'Resurse Umane' ],
+        [ 'id' => 10, 'rol' => 'Client' ],
+        [ 'id' => 11, 'rol' => 'Furnizor' ],
+        [ 'id' => 12, 'rol' => 'Consultant' ],
+        [ 'id' => 13, 'rol' => 'Administrator' ],
+        [ 'id' => 14, 'rol' => 'Utilizator' ],
+        [ 'id' => 15, 'rol' => 'Manager' ],
+        [ 'id' => 16, 'rol' => 'Operator' ],
+        [ 'id' => 17, 'rol' => 'Vizitator' ],
+        [ 'id' => 18, 'rol' => 'Supervizor' ],
+        [ 'id' => 19, 'rol' => 'Contabil' ],
+        [ 'id' => 20, 'rol' => 'Tehnic' ],
     ];
 
     public function render()
     {
+        $currentPage = $this->getPage();
+        $total = count($this->allRoles);
+        $offset = ($currentPage - 1) * $this->perPage;
+        $items = array_slice($this->allRoles, $offset, $this->perPage);
+        $roles = new LengthAwarePaginator(
+            $items,
+            $total,
+            $this->perPage,
+            $currentPage,
+            [
+                'path' => request()->url(),
+                'pageName' => 'page',
+            ]
+        );
         return view('livewire.roles', [
-            'roles' => $this->roles,
+            'roles' => $roles,
         ]);
     }
 }
