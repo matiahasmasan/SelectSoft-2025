@@ -8,20 +8,18 @@
     </div>
 
     <!-- MODAL -->
-    <div x-show="addRoleModalOpen" style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-        <div class="bg-base-100 rounded-lg shadow-lg w-full max-w-md p-6 relative">
-            <h2 class="text-lg font-semibold mb-4">{{ __('Adaugă rol nou') }}</h2>
+    <x-modal x-show="addRoleModalOpen" title="{{ __('Adaugă rol nou') }}">
+        <x-slot name="body">
             <input type="text" x-model="roleName" class="input input-bordered w-full mb-4" placeholder="{{ __('Nume rol') }}" />
-            <div class="flex justify-end gap-2">
-                <button class="btn btn-primary" @click="addRoleModalOpen = false">{{ __('Adaugă') }}</button>
-                <button class="btn btn-error" @click="addRoleModalOpen = false">{{ __('Renunță') }}</button>
-            </div>
-        </div>
-    </div>
+        </x-slot>
+        <x-slot name="footer">
+            <button class="btn btn-primary" @click="addRoleModalOpen = false">{{ __('Adaugă') }}</button>
+            <button class="btn btn-error" @click="addRoleModalOpen = false">{{ __('Renunță') }}</button>
+        </x-slot>
+    </x-modal>
     <!-- DELETE ROLE MODAL -->
-    <div x-show="deleteRoleModalOpen" style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-        <div class="bg-base-100 rounded-lg shadow-lg w-full max-w-md p-6 relative">
-            <h2 class="text-lg font-semibold mb-4">{{ __('Șterge rol') }}</h2>
+    <x-modal x-show="deleteRoleModalOpen" title="{{ __('Șterge rol') }}">
+        <x-slot name="body">
             <p class="mb-4">{{ __('Ești sigur că vrei să ștergi acest rol?') }}</p>
             <template x-if="roleToDelete">
                 <div class="mb-4">
@@ -29,12 +27,12 @@
                     <span class="ml-2 text-error" x-text="roleToDelete.rol"></span>
                 </div>
             </template>
-            <div class="flex justify-end gap-2">
-                <button class="btn btn-primary" @click="deleteRoleModalOpen = false">{{ __('Șterge') }}</button>
-                <button class="btn btn-error" @click="deleteRoleModalOpen = false">{{ __('Renunță') }}</button>
-            </div>
-        </div>
-    </div>
+        </x-slot>
+        <x-slot name="footer">
+            <button class="btn btn-primary" @click="deleteRoleModalOpen = false">{{ __('Șterge') }}</button>
+            <button class="btn btn-error" @click="deleteRoleModalOpen = false">{{ __('Renunță') }}</button>
+        </x-slot>
+    </x-modal>
     
     <!-- FILTERS -->
     <div class="space-y-3 xl:space-y-0 mb-2 xl:mb-6">
