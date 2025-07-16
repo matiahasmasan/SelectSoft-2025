@@ -10,9 +10,12 @@
     <!-- FILTERS -->
     <div class="space-y-3 xl:space-y-0 mb-2 xl:mb-6">
         <!-- Mobile Tablet-->
-        <div class="block xl:hidden space-y-3">
+        <div class="block xl:hidden space-y-4">
             <div class="flex gap-2">
-                <input type="text" class="input input-bordered input-sm md:input-md flex-1" placeholder="{{ __('Caută...') }}" />
+                <div class="relative flex-1">
+                    <input type="text" class="input input-bordered input-sm md:input-md w-full pr-10" placeholder="{{ __('Caută...') }}" />
+                    <span class="icon-[tabler--search] size-3 lg:size-4 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
+                </div>
             </div>
             <!-- Row -->
             <div class="flex gap-2">
@@ -32,7 +35,10 @@
         <!-- Desktop -->
         <div class="hidden xl:flex items-center gap-3">
             <div class="flex flex-1 gap-2 min-w-0">
-                <input type="text" class="input input-bordered input-md w-full min-w-0" placeholder="{{ __('Caută...') }}" />
+                <div class="relative w-full min-w-0">
+                    <input type="text" class="input input-bordered input-md w-full pr-10 min-w-0" placeholder="{{ __('Caută...') }}" />
+                    <span class="icon-[tabler--search] size-4 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
+                </div>
             </div>
             <select class="select select-bordered select-md w-44 flex-shrink-0">
                 <option>{{ __('Sortează după') }}</option>
