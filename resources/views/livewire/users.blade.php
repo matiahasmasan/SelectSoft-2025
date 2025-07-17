@@ -13,32 +13,74 @@
         <div class="block xl:hidden space-y-4">
             <div class="flex gap-2">
                 <div class="relative flex-1">
-                    <input type="text" class="input input-bordered input-sm md:input-md w-full pr-10" placeholder="{{ __('Caută...') }}" />
-                    <span class="icon-[tabler--search] size-3 lg:size-4 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
+                    <input type="text" class="input input-bordered input-sm w-full pr-10 min-h-[2.5rem] px-4" placeholder="{{ __('Caută...') }}" />
+                    <span class="icon-[tabler--search] size-3 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
                 </div>
             </div>
-            <!-- Row 1 -->
+            <!-- Row 1: Custom Dropdowns -->
             <div class="flex gap-2">
-                <select class="select select-bordered select-sm md:select-md flex-1 ">
-                    <option>{{ __('Sortează după') }}</option>
-                    <option>{{ __('Nume') }}</option>
-                    <option>{{ __('Data adăugării') }}</option>
-                </select>
-                <select class="select select-bordered select-sm md:select-md flex-1 ">
-                    <option>{{ __('Filtrează după') }}</option>
-                    <option>{{ __('Rol') }}</option>
-                    <option>{{ __('Companie') }}</option>
-                </select>
+                <!-- Sortează după Dropdown -->
+                <div x-data="{ open: false, selected: '{{ __('Sortează după') }}' }" class="relative flex-1">
+                    <button @click="open = !open" type="button"
+                        class="select select-bordered select-sm md:select-md w-full text-left bg-base-100 text-base-content flex items-center px-4 py-2 rounded-box"
+                        style="min-height: 2.5rem;">
+                        <span x-text="selected" class="flex-1"></span>
+                    </button>
+                    <ul x-show="open" @click.away="open = false"
+                        class="absolute z-10 mt-1 w-full bg-base-100 border border-base-300 rounded-box shadow max-h-48 overflow-y-auto text-base-content">
+                        <li @click="selected = '{{ __('Sortează după') }}'; open = false"
+                            class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                            :class="{ 'bg-primary text-primary-content': selected === '{{ __('Sortează după') }}' }">
+                            {{ __('Sortează după') }}
+                        </li>
+                        <li @click="selected = '{{ __('Nume') }}'; open = false"
+                            class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                            :class="{ 'bg-primary text-primary-content': selected === '{{ __('Nume') }}' }">
+                            {{ __('Nume') }}
+                        </li>
+                        <li @click="selected = '{{ __('Data adăugării') }}'; open = false"
+                            class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                            :class="{ 'bg-primary text-primary-content': selected === '{{ __('Data adăugării') }}' }">
+                            {{ __('Data adăugării') }}
+                        </li>
+                    </ul>
+                </div>
+                <!-- Filtrează după Dropdown -->
+                <div x-data="{ open: false, selected: '{{ __('Filtrează după') }}' }" class="relative flex-1">
+                    <button @click="open = !open" type="button"
+                        class="select select-bordered select-sm md:select-md w-full text-left bg-base-100 text-base-content flex items-center px-4 py-2 rounded-box"
+                        style="min-height: 2.5rem;">
+                        <span x-text="selected" class="flex-1"></span>
+                    </button>
+                    <ul x-show="open" @click.away="open = false"
+                        class="absolute z-10 mt-1 w-full bg-base-100 border border-base-300 rounded-box shadow max-h-48 overflow-y-auto text-base-content">
+                        <li @click="selected = '{{ __('Filtrează după') }}'; open = false"
+                            class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                            :class="{ 'bg-primary text-primary-content': selected === '{{ __('Filtrează după') }}' }">
+                            {{ __('Filtrează după') }}
+                        </li>
+                        <li @click="selected = '{{ __('Rol') }}'; open = false"
+                            class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                            :class="{ 'bg-primary text-primary-content': selected === '{{ __('Rol') }}' }">
+                            {{ __('Rol') }}
+                        </li>
+                        <li @click="selected = '{{ __('Companie') }}'; open = false"
+                            class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                            :class="{ 'bg-primary text-primary-content': selected === '{{ __('Companie') }}' }">
+                            {{ __('Companie') }}
+                        </li>
+                    </ul>
+                </div>
             </div>
             <!-- Row 2 -->
             <div class="flex gap-2">
                 <div class="relative flex-1">
-                    <input type="text" class="input input-bordered input-sm md:input-md w-full pr-10" placeholder="{{ __('Atasati la ...') }}" />
-                    <span class="icon-[tabler--user-cog] size-3 lg:size-4 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
+                    <input type="text" class="input input-bordered input-sm w-full pr-10 min-h-[2.5rem] px-4" placeholder="{{ __('Atasati la ...') }}" />
+                    <span class="icon-[tabler--user-cog] size-3 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
                 </div>
-                <label class="flex items-center gap-2 whitespace-nowrap flex-1">
-                    <input type="checkbox" class="checkbox checkbox-primary checkbox-sm md:checkbox-md" id="showAllUsers" />
-                    <span class="label-text text-xs md:text-sm">{{ __('Afișează toți') }}</span>
+                <label class="flex items-center gap-2 whitespace-nowrap flex-1 min-h-[2.5rem] px-4">
+                    <input type="checkbox" class="checkbox checkbox-primary checkbox-xs" id="showAllUsers" />
+                    <span class="label-text text-xs">{{ __('Afișează toți') }}</span>
                 </label>
             </div>
         </div>
@@ -51,16 +93,58 @@
                     <span class="icon-[tabler--search] size-4 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
                 </div>
             </div>
-            <select class="select select-bordered select-md w-44 flex-shrink-0">
-                <option>{{ __('Sortează după') }}</option>
-                <option>{{ __('Nume') }}</option>
-                <option>{{ __('Data adăugării') }}</option>
-            </select>
-            <select class="select select-bordered select-md w-44 flex-shrink-0">
-                <option>{{ __('Filtrează după') }}</option>
-                <option>{{ __('Rol') }}</option>
-                <option>{{ __('Companie') }}</option>
-            </select>
+            <!-- Sortează după Dropdown -->
+            <div x-data="{ open: false, selected: '{{ __('Sortează după') }}' }" class="relative w-44 flex-shrink-0">
+                <button @click="open = !open" type="button"
+                    class="select select-bordered select-md w-full text-left bg-base-100 text-base-content flex items-center px-4 py-2 rounded-box"
+                    style="min-height: 2.5rem;">
+                    <span x-text="selected" class="flex-1"></span>
+                </button>
+                <ul x-show="open" @click.away="open = false"
+                    class="absolute z-10 mt-1 w-full bg-base-100 border border-base-300 rounded-box shadow max-h-48 overflow-y-auto text-base-content">
+                    <li @click="selected = '{{ __('Sortează după') }}'; open = false"
+                        class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                        :class="{ 'bg-primary text-primary-content': selected === '{{ __('Sortează după') }}' }">
+                        {{ __('Sortează după') }}
+                    </li>
+                    <li @click="selected = '{{ __('Nume') }}'; open = false"
+                        class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                        :class="{ 'bg-primary text-primary-content': selected === '{{ __('Nume') }}' }">
+                        {{ __('Nume') }}
+                    </li>
+                    <li @click="selected = '{{ __('Data adăugării') }}'; open = false"
+                        class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                        :class="{ 'bg-primary text-primary-content': selected === '{{ __('Data adăugării') }}' }">
+                        {{ __('Data adăugării') }}
+                    </li>
+                </ul>
+            </div>
+            <!-- Filtrează după Dropdown -->
+            <div x-data="{ open: false, selected: '{{ __('Filtrează după') }}' }" class="relative w-44 flex-shrink-0">
+                <button @click="open = !open" type="button"
+                    class="select select-bordered select-md w-full text-left bg-base-100 text-base-content flex items-center px-4 py-2 rounded-box"
+                    style="min-height: 2.5rem;">
+                    <span x-text="selected" class="flex-1"></span>
+                </button>
+                <ul x-show="open" @click.away="open = false"
+                    class="absolute z-10 mt-1 w-full bg-base-100 border border-base-300 rounded-box shadow max-h-48 overflow-y-auto text-base-content">
+                    <li @click="selected = '{{ __('Filtrează după') }}'; open = false"
+                        class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                        :class="{ 'bg-primary text-primary-content': selected === '{{ __('Filtrează după') }}' }">
+                        {{ __('Filtrează după') }}
+                    </li>
+                    <li @click="selected = '{{ __('Rol') }}'; open = false"
+                        class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                        :class="{ 'bg-primary text-primary-content': selected === '{{ __('Rol') }}' }">
+                        {{ __('Rol') }}
+                    </li>
+                    <li @click="selected = '{{ __('Companie') }}'; open = false"
+                        class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                        :class="{ 'bg-primary text-primary-content': selected === '{{ __('Companie') }}' }">
+                        {{ __('Companie') }}
+                    </li>
+                </ul>
+            </div>
             <div class="relative w-40 flex-shrink-0">
                 <input type="text" class="input input-bordered input-md w-full pr-10" placeholder="{{ __('Atasati la ...') }}" />
                 <span class="icon-[tabler--user-cog] size-4 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
@@ -172,19 +256,59 @@
                 <form @submit.prevent>
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-1">{{ __('Rol') }}</label>
-                        <select x-model="userToEdit.rol" class="select select-bordered w-full">
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                            <option value="manager">Manager</option>
-                        </select>
+                        <div x-data="{ 
+                            open: false, 
+                            selected: userToEdit.rol, 
+                            init() { this.$watch('userToEdit.rol', value => this.selected = value); } 
+                        }" class="relative">
+                            <button
+                                @click="open = !open"
+                                type="button"
+                                class="select select-bordered w-full text-left bg-base-100 text-base-content flex items-center px-4 py-2"
+                                style="min-height: 2.5rem;"
+                            >
+                                <span x-text="selected || 'Selectează rolul'" class="flex-1"></span>
+                            </button>
+                            <ul x-show="open" @click.away="open = false"
+                                class="absolute z-10 mt-1 w-full bg-base-100 border border-base-300 rounded-box shadow max-h-48 overflow-y-auto text-base-content">
+                                @foreach($roles as $role)
+                                    <li @click="selected = '{{ $role['rol'] }}'; userToEdit.rol = '{{ $role['rol'] }}'; open = false"
+                                        class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition"
+                                        :class="{ 'bg-primary text-primary-content': selected === '{{ $role['rol'] }}' }">
+                                        {{ $role['rol'] }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-1">{{ __('Subordonat') }}</label>
-                        <select x-model="userToEdit.subordonat" class="select select-bordered w-full">
-                            <option value="">{{ __('Niciunul') }}</option>
-                            <option value="John Doe">John Doe</option>
-                            <option value="Jane Smith">Jane Smith</option>
-                        </select>
+                        <div x-data="{ 
+                            open: false, 
+                            selected: userToEdit.subordonat, 
+                            init() { this.$watch('userToEdit.subordonat', value => this.selected = value); } 
+                        }" class="relative">
+                            <button @click="open = !open" type="button"
+                                class="select select-bordered w-full text-left bg-base-100 text-base-content flex items-center px-4 py-2"
+                                style="min-height: 2.5rem;">
+                                <span x-text="selected || 'Niciunul'" class="flex-1"></span>
+                            </button>
+                            <ul x-show="open" @click.away="open = false"
+                                class="absolute z-10 mt-1 w-full bg-base-100 border border-base-300 rounded-box shadow max-h-48 overflow-y-auto text-base-content">
+                                <li @click="selected = ''; userToEdit.subordonat = ''; open = false"
+                                    class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition"
+                                    :class="{ 'bg-primary text-primary-content': selected === '' }">
+                                    {{ __('Niciunul') }}
+                                </li>
+                                @foreach($allUsers->pluck('subordonat')->unique()->filter(fn($s) => $s && $s !== '-') as $subordonat)
+                                    <li @click="selected = '{{ $subordonat }}'; userToEdit.subordonat = '{{ $subordonat }}'; open = false"
+                                        class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition"
+                                        :class="{ 'bg-primary text-primary-content': selected === '{{ $subordonat }}' }">
+                                        {{ $subordonat }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                     <div class="flex justify-end gap-2">
                         <button class="btn btn-primary" type="submit">{{ __('Salvează') }}</button>

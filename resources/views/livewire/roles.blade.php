@@ -6,48 +6,41 @@
             <span>{{ __('Adaugă rol') }}</span>
         </button>   
     </div>
-
-    <!-- MODAL -->
-    <x-modal x-show="addRoleModalOpen" title="{{ __('Adaugă rol nou') }}">
-        <x-slot name="body">
-            <input type="text" x-model="roleName" class="input input-bordered w-full mb-4" placeholder="{{ __('Nume rol') }}" />
-        </x-slot>
-        <x-slot name="footer">
-            <button class="btn btn-primary" @click="addRoleModalOpen = false">{{ __('Adaugă') }}</button>
-            <button class="btn btn-error" @click="addRoleModalOpen = false">{{ __('Renunță') }}</button>
-        </x-slot>
-    </x-modal>
-    <!-- DELETE ROLE MODAL -->
-    <x-modal x-show="deleteRoleModalOpen" title="{{ __('Șterge rol') }}">
-        <x-slot name="body">
-            <p class="mb-4">{{ __('Ești sigur că vrei să ștergi acest rol?') }}</p>
-            <template x-if="roleToDelete">
-                <div class="mb-4">
-                    <span class="font-semibold">{{ __('Rol:') }}</span>
-                    <span class="ml-2 text-error" x-text="roleToDelete.rol"></span>
-                </div>
-            </template>
-        </x-slot>
-        <x-slot name="footer">
-            <button class="btn btn-primary" @click="deleteRoleModalOpen = false">{{ __('Șterge') }}</button>
-            <button class="btn btn-error" @click="deleteRoleModalOpen = false">{{ __('Renunță') }}</button>
-        </x-slot>
-    </x-modal>
-    
     <!-- FILTERS -->
     <div class="space-y-3 xl:space-y-0 mb-2 xl:mb-6">
         <!-- Mobile Tablet -->
         <div class="block xl:hidden space-y-4">
             <div class="flex gap-2">
-                <div class="relative flex-1 max-w-xs">
-                    <input type="text" class="input input-bordered input-sm md:input-md w-full pr-10" placeholder="{{ __('Caută...') }}" />
-                    <span class="icon-[tabler--search] size-3 lg:size-4 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
+                <div class="relative flex-1">
+                    <input type="text" class="input input-bordered input-sm w-full pr-10 min-h-[2.5rem] px-4" placeholder="{{ __('Caută...') }}" />
+                    <span class="icon-[tabler--search] size-3 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
                 </div>
-                <select class="select select-bordered select-sm md:select-md max-w-xs">
-                    <option>{{ __('Sortează după') }}</option>
-                    <option>{{ __('Rol') }}</option>
-                    <option>{{ __('ID') }}</option>
-                </select>
+                <!-- Sortează după Dropdown -->
+                <div x-data="{ open: false, selected: '{{ __('Sortează după') }}' }" class="relative flex-1">
+                    <button @click="open = !open" type="button"
+                        class="select select-bordered select-sm md:select-md w-full text-left bg-base-100 text-base-content flex items-center px-4 py-2 rounded-box"
+                        style="min-height: 2.5rem;">
+                        <span x-text="selected" class="flex-1"></span>
+                    </button>
+                    <ul x-show="open" @click.away="open = false"
+                        class="absolute z-10 mt-1 w-full bg-base-100 border border-base-300 rounded-box shadow max-h-48 overflow-y-auto text-base-content">
+                        <li @click="selected = '{{ __('Sortează după') }}'; open = false"
+                            class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                            :class="{ 'bg-primary text-primary-content': selected === '{{ __('Sortează după') }}' }">
+                            {{ __('Sortează după') }}
+                        </li>
+                        <li @click="selected = '{{ __('Nume') }}'; open = false"
+                            class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                            :class="{ 'bg-primary text-primary-content': selected === '{{ __('Nume') }}' }">
+                            {{ __('Nume') }}
+                        </li>
+                        <li @click="selected = '{{ __('Data adăugării') }}'; open = false"
+                            class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                            :class="{ 'bg-primary text-primary-content': selected === '{{ __('Data adăugării') }}' }">
+                            {{ __('Data adăugării') }}
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -57,11 +50,32 @@
                 <input type="text" class="input input-bordered input-md w-full pr-10 min-w-0" placeholder="{{ __('Caută...') }}" />
                 <span class="icon-[tabler--search] size-4 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
             </div>
-            <select class="select select-bordered select-md w-44 flex-shrink-0">
-                <option>{{ __('Sortează după') }}</option>
-                <option>{{ __('Rol') }}</option>
-                <option>{{ __('ID') }}</option>
-            </select>
+            <!-- Sortează după Dropdown -->
+            <div x-data="{ open: false, selected: '{{ __('Sortează după') }}' }" class="relative w-44 flex-shrink-0">
+                <button @click="open = !open" type="button"
+                    class="select select-bordered select-md w-full text-left bg-base-100 text-base-content flex items-center px-4 py-2 rounded-box"
+                    style="min-height: 2.5rem;">
+                    <span x-text="selected" class="flex-1"></span>
+                </button>
+                <ul x-show="open" @click.away="open = false"
+                    class="absolute z-10 mt-1 w-full bg-base-100 border border-base-300 rounded-box shadow max-h-48 overflow-y-auto text-base-content">
+                    <li @click="selected = '{{ __('Sortează după') }}'; open = false"
+                        class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                        :class="{ 'bg-primary text-primary-content': selected === '{{ __('Sortează după') }}' }">
+                        {{ __('Sortează după') }}
+                    </li>
+                    <li @click="selected = '{{ __('Nume') }}'; open = false"
+                        class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                        :class="{ 'bg-primary text-primary-content': selected === '{{ __('Nume') }}' }">
+                        {{ __('Nume') }}
+                    </li>
+                    <li @click="selected = '{{ __('Data adăugării') }}'; open = false"
+                        class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                        :class="{ 'bg-primary text-primary-content': selected === '{{ __('Data adăugării') }}' }">
+                        {{ __('Data adăugării') }}
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -123,4 +137,30 @@
       <!-- Pagination (Mobile) -->
       <x-pagination :paginator="$roles" />
     </div>
+    <!-- MODAL -->
+    <x-modal x-show="addRoleModalOpen" title="{{ __('Adaugă rol nou') }}">
+        <x-slot name="body">
+            <input type="text" x-model="roleName" class="input input-bordered w-full mb-4" placeholder="{{ __('Nume rol') }}" />
+        </x-slot>
+        <x-slot name="footer">
+            <button class="btn btn-primary" @click="addRoleModalOpen = false">{{ __('Adaugă') }}</button>
+            <button class="btn btn-error" @click="addRoleModalOpen = false">{{ __('Renunță') }}</button>
+        </x-slot>
+    </x-modal>
+    <!-- DELETE ROLE MODAL -->
+    <x-modal x-show="deleteRoleModalOpen" title="{{ __('Șterge rol') }}">
+        <x-slot name="body">
+            <p class="mb-4">{{ __('Ești sigur că vrei să ștergi acest rol?') }}</p>
+            <template x-if="roleToDelete">
+                <div class="mb-4">
+                    <span class="font-semibold">{{ __('Rol:') }}</span>
+                    <span class="ml-2 text-error" x-text="roleToDelete.rol"></span>
+                </div>
+            </template>
+        </x-slot>
+        <x-slot name="footer">
+            <button class="btn btn-primary" @click="deleteRoleModalOpen = false">{{ __('Șterge') }}</button>
+            <button class="btn btn-error" @click="deleteRoleModalOpen = false">{{ __('Renunță') }}</button>
+        </x-slot>
+    </x-modal>
 </div>
