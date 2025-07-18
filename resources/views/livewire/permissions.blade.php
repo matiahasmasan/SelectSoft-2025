@@ -45,11 +45,29 @@
                         </li>
                     </ul>
                 </div>
-                <select class="select select-bordered select-sm md:select-md flex-1">
-                    <option>{{ __('Selectează rolul') }}</option>
-                    <option>Administrator</option>
-                    <option>Utilizator</option>
-                </select>
+                <!-- Custom Roles Dropdown -->
+                <div x-data="{ open: false, selected: '{{ __('Selectează rolul') }}' }" class="relative flex-1">
+                    <button @click="open = !open" type="button"
+                        class="select select-bordered select-sm md:select-md w-full text-left bg-base-100 text-base-content flex items-center px-4 py-2 rounded-box"
+                        style="min-height: 2.5rem;">
+                        <span x-text="selected" class="flex-1"></span>
+                    </button>
+                    <ul x-show="open" @click.away="open = false"
+                        class="absolute z-10 mt-1 w-full bg-base-100 border border-base-300 rounded-box shadow max-h-48 overflow-y-auto text-base-content">
+                        <li @click="selected = '{{ __('Selectează rolul') }}'; open = false"
+                            class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                            :class="{ 'bg-primary text-primary-content': selected === '{{ __('Selectează rolul') }}' }">
+                            {{ __('Selectează rolul') }}
+                        </li>
+                        @foreach($roles as $role)
+                        <li @click="selected = '{{ $role['rol'] }}'; open = false"
+                            class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                            :class="{ 'bg-primary text-primary-content': selected === '{{ $role['rol'] }}' }">
+                            {{ $role['rol'] }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -87,11 +105,28 @@
                     </li>
                 </ul>
             </div>
-            <select class="select select-bordered select-md w-44 flex-shrink-0">
-                <option>{{ __('Selectează rolul') }}</option>
-                <option>Administrator</option>
-                <option>Utilizator</option>
-            </select>
+            <div x-data="{ open: false, selected: '{{ __('Selectează rolul') }}' }" class="relative w-44 flex-shrink-0">
+                <button @click="open = !open" type="button"
+                    class="select select-bordered select-md w-full text-left bg-base-100 text-base-content flex items-center px-4 py-2 rounded-box"
+                    style="min-height: 2.5rem;">
+                    <span x-text="selected" class="flex-1"></span>
+                </button>
+                <ul x-show="open" @click.away="open = false"
+                    class="absolute z-10 mt-1 w-full bg-base-100 border border-base-300 rounded-box shadow max-h-48 overflow-y-auto text-base-content">
+                    <li @click="selected = '{{ __('Selectează rolul') }}'; open = false"
+                        class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                        :class="{ 'bg-primary text-primary-content': selected === '{{ __('Selectează rolul') }}' }">
+                        {{ __('Selectează rolul') }}
+                    </li>
+                    @foreach($roles as $role)
+                    <li @click="selected = '{{ $role['rol'] }}'; open = false"
+                        class="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-content transition rounded-box"
+                        :class="{ 'bg-primary text-primary-content': selected === '{{ $role['rol'] }}' }">
+                        {{ $role['rol'] }}
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
     </div>
 

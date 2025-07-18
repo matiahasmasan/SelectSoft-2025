@@ -13,7 +13,7 @@
         <div class="block xl:hidden space-y-4">
             <div class="flex gap-2">
                 <div class="relative flex-1">
-                    <input type="text" class="input input-bordered input-sm w-full pr-10 min-h-[2.5rem] px-4" placeholder="{{ __('Caută...') }}" />
+                    <input type="text" wire:model.live.debounce.200ms="term" class="input input-bordered input-sm w-full pr-10 min-h-[2.5rem] px-4" placeholder="{{ __('Caută...') }}" />
                     <span class="icon-[tabler--search] size-3 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
                 </div>
             </div>
@@ -89,7 +89,7 @@
         <div class="hidden xl:flex items-center gap-3">
             <div class="flex flex-1 gap-2 min-w-0">
                 <div class="relative w-full min-w-0">
-                    <input type="text" class="input input-bordered input-md w-full pr-10 min-w-0" placeholder="{{ __('Caută...') }}" />
+                    <input type="text" wire:model.live.debounce.200ms="term" class="input input-bordered input-md w-full pr-10 min-w-0" placeholder="{{ __('Caută...') }}" />
                     <span class="icon-[tabler--search] size-4 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
                 </div>
             </div>
