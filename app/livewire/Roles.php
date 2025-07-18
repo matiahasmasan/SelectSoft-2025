@@ -5,14 +5,18 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class Roles extends Component
 {
     use WithPagination;
 
+    public $term='';
+
     public int $perPage = 5; // Roles per page
 
-    public \Illuminate\Support\Collection $allRoles;
+    public Collection $allRoles;
+    // public \Illuminate\Support\Collection $allRoles;
 
     public function mount()
     {
@@ -29,27 +33,47 @@ class Roles extends Component
             [ 'id' => 10, 'rol' => 'Client' ],
             [ 'id' => 11, 'rol' => 'Furnizor' ],
             [ 'id' => 12, 'rol' => 'Consultant' ],
+            [ 'id' => 13, 'rol' => 'Administrator' ],
+            [ 'id' => 14, 'rol' => 'Utilizator' ],
+            [ 'id' => 15, 'rol' => 'Manager' ],
+            [ 'id' => 16, 'rol' => 'Operator' ],
+            [ 'id' => 17, 'rol' => 'Vizitator' ],
+            [ 'id' => 18, 'rol' => 'Supervizor' ],
+            [ 'id' => 19, 'rol' => 'Contabil' ],
+            [ 'id' => 20, 'rol' => 'Tehnic' ],
+            [ 'id' => 21, 'rol' => 'student' ],
         ]);
     }
 
-    public function render()
+    public function updatedTerm()
     {
-        $currentPage = $this->getPage();
-        $total = $this->allRoles->count();
-        $offset = ($currentPage - 1) * $this->perPage;
-        $items = $this->allRoles->slice($offset, $this->perPage)->values()->all();
-        $roles = new LengthAwarePaginator(
-            $items,
-            $total,
-            $this->perPage,
-            $currentPage,
-            [
-                'path' => request()->url(),
-                'pageName' => 'page',
-            ]
-        );
-        return view('livewire.roles', [
-            'roles' => $roles,
-        ]);
+        $this->resetPage();
     }
+
+    public function render()
+        {
+            $collection = $this->allRoles;
+
+            if ($this->term) {
+                $collection = $collection->filter(function ($role) {
+                    return str_contains(strtolower($role['id']), strtolower($this->term))
+                        || str_contains(strtolower($role['rol']), strtolower($this->term));
+                });
+            }
+
+            $currentPage = $this->getPage();
+            $total = $collection->count();
+            $offset = ($currentPage - 1) * $this->perPage;
+            $items = $collection->slice($offset, $this->perPage)->values();
+
+            $roles = new LengthAwarePaginator($items, $total, $this->perPage, $currentPage, [
+                'path' => LengthAwarePaginator::resolveCurrentPath(),
+                'pageName' => 'page',
+            ]);
+
+            return view('livewire.roles', [
+                'roles' => $roles,
+                // 'roles' => $this->allRoles,
+            ]);
+        }
 }
